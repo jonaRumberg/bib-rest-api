@@ -1,24 +1,23 @@
 {
-  "books": [],
+  "books": [
+    {
+      "title": "Test",
+      "author": "e065c374-25e2-4c25-bb32-009428b44de4",
+      "category": "8dd2afca-2d87-4bfd-b884-f2b64c2aff37",
+      "id": "13a165f7-bd9e-4b18-943b-5171e6257479"
+    }
+  ],
   "authors": [
-    {
-      "name": "John Doe",
-      "birthdate": "1.1.2000"
-    },
-    {
-      "name": "John Doe",
-      "birthdate": "1.1.2000"
-    },
     {
       "name": "John Doe",
       "birthdate": "1.1.2000",
       "id": "e065c374-25e2-4c25-bb32-009428b44de4"
-    },
-    {
-      "name": "John Doe",
-      "birthdate": "1.1.2000",
-      "id": "4671db36-d4aa-4b37-8695-7111ab644050"
     }
   ],
-  "categories": []
+  "categories": [
+    {
+      "title": "Fantasy",
+      "id": "8dd2afca-2d87-4bfd-b884-f2b64c2aff37"
+    }
+  ]
 }

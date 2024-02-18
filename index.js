@@ -13,13 +13,25 @@ const defaultData = {
 	categories: []
 }
 
+const validators = {
+	string: (a) => typeof a == 'string',
+	uuid: (a) => validators.string(a),
+	date: (a) => validators.string(a), 
+}
+
 const model = {
-	books: {},
-	authors: {
-		name: (a) => typeof a == 'string',
-		birthdate: (a) => true
+	books: {
+		title: validators.string,
+		author: validators.uuid,
+		category: validators.uuid,
 	},
-	categories: {}
+	authors: {
+		name: validators.string,
+		birthdate: validators.date
+	},
+	categories: {
+		title: validators.string,
+	}
 }
 
 
@@ -32,6 +44,40 @@ app.get('/books', async (_req, res) => {
 	res.status(200).send(db.data.books);
 })
 
+app.get('/books/:id', async (req, res) => {
+	console.log("GET Book " + req.params.id)
+	
+	const book = db.data.books.find(b => b.id == req.params.id)
+
+	if(book != undefined) {
+		console.log(book);
+		res.status(200).send(book)
+	} else {
+		console.log("Not found");
+		res.sendStatus(404);
+	}
+})
+
+app.post('/books', (req, res) => {
+	console.log("POST Books");
+
+	if(validate(req.body, model.books)){
+
+		req.body.id = uuid();
+
+		console.log("Inserting into db")
+		console.log(req.body)
+
+		db.data.books.push(req.body);
+		db.write()
+		res.sendStatus(201);
+	} else {
+		console.log("Bad request")
+
+		res.sendStatus(400);
+	}
+});
+
 //Autors endpoints
 app.get('/authors', async (_req, res) => {
 	console.log("GET Authors");
@@ -39,10 +85,10 @@ app.get('/authors', async (_req, res) => {
 	res.status(200).send(db.data.authors);
 })
 
-app.post('/authors', async (req, res) => {
+app.post('/authors', (req, res) => {
 	console.log("POST Authors");
 
-	if(validate(req.body, model.authors)){
+	if(validate(req.body, args)){
 
 		req.body.id = uuid();
 
@@ -57,7 +103,7 @@ app.post('/authors', async (req, res) => {
 
 		res.sendStatus(400);
 	}
-})
+});
 
 //Categories endpoints
 app.get('/categories', async (_req, res) => {
@@ -66,12 +112,30 @@ app.get('/categories', async (_req, res) => {
 	res.status(200).send(db.data.categories);
 })
 
+app.post('/categories', (req, res) => {
+	console.log("POST Categories");
+
+	if(validate(req.body, model.categories)){
+
+		req.body.id = uuid();
+
+		console.log("Inserting into db")
+		console.log(req.body)
+
+		db.data.categories.push(req.body);
+		db.write()
+		res.sendStatus(201);
+	} else {
+		console.log("Bad request")
+
+		res.sendStatus(400);
+	}
+});
+
+//start the server
 app.listen(PORT, () => {
 	console.log("Server is running on port: " + PORT)
 })
-
-
-
 
 //function to iterate over input object and check against validator functions
 function validate(obj, args) {
