@@ -1,19 +1,24 @@
 {
-  "books": [
-    "asdf",
-    "asdf",
-    "hello world",
-    "hello world",
-    "hello world",
-    "hello world",
-    "hello world",
-    "hello world",
-    "hello world",
-    "hello world",
-    "hello world",
-    "hello world",
-    "hello world"
+  "books": [],
+  "authors": [
+    {
+      "name": "John Doe",
+      "birthdate": "1.1.2000"
+    },
+    {
+      "name": "John Doe",
+      "birthdate": "1.1.2000"
+    },
+    {
+      "name": "John Doe",
+      "birthdate": "1.1.2000",
+      "id": "e065c374-25e2-4c25-bb32-009428b44de4"
+    },
+    {
+      "name": "John Doe",
+      "birthdate": "1.1.2000",
+      "id": "4671db36-d4aa-4b37-8695-7111ab644050"
+    }
   ],
-  "authors": [],
   "categories": []
 }
