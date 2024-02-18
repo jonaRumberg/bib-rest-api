@@ -85,6 +85,20 @@ app.get('/authors', async (_req, res) => {
 	res.status(200).send(db.data.authors);
 })
 
+app.get('/authors/:id', async (req, res) => {
+	console.log("GET Author " + req.params.id)
+	
+	const author = db.data.authors.find(b => b.id == req.params.id)
+
+	if(author != undefined) {
+		console.log(author);
+		res.status(200).send(author)
+	} else {
+		console.log("Not found");
+		res.sendStatus(404);
+	}
+})
+
 app.post('/authors', (req, res) => {
 	console.log("POST Authors");
 
@@ -110,6 +124,20 @@ app.get('/categories', async (_req, res) => {
 	console.log("GET Categories");
 
 	res.status(200).send(db.data.categories);
+})
+
+app.get('/categories/:id', async (req, res) => {
+	console.log("GET Category " + req.params.id)
+	
+	const category = db.data.categories.find(b => b.id == req.params.id)
+
+	if(category != undefined) {
+		console.log(category);
+		res.status(200).send(category)
+	} else {
+		console.log("Not found");
+		res.sendStatus(404);
+	}
 })
 
 app.post('/categories', (req, res) => {
