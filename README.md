@@ -2,9 +2,24 @@
 
 **Entitäten:**
 
-* Bücher
+* Bücher 
+    {
+        id,
+        title,
+        author,
+        category,
+    }
 * Verfasser
+    {
+        id,
+        name,
+        birthdate
+    }
 * Kategorien
+    {
+        id,
+        title
+    }
 
 ## Bücher
 
