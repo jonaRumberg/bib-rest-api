@@ -5,6 +5,36 @@
       "author": "e065c374-25e2-4c25-bb32-009428b44de4",
       "category": "8dd2afca-2d87-4bfd-b884-f2b64c2aff37",
       "id": "13a165f7-bd9e-4b18-943b-5171e6257479"
+    },
+    {
+      "title": "Test",
+      "author": "4671db36-d4aa-4b37-8695-7111ab644050",
+      "category": "8dd2afca-2d87-4bfd-b884-f2b64c2aff37",
+      "id": "dc2fa25c-bef2-48b9-b9bb-c845166e1685"
+    },
+    {
+      "title": "Test",
+      "author": "4671db36-d4aa-4b37-8695-7111ab644050",
+      "category": "8dd2afca-2d87-4bfd-b884-f2b64c2aff37",
+      "id": "2fd5cec9-1f70-462c-aba6-080dc32b74d2"
+    },
+    {
+      "title": "Test",
+      "author": "e065c374-25e2-4c25-bb32-009428b44de4",
+      "category": "8dd2afca-2d87-4bfd-b884-f2b64c2aff37",
+      "id": "82b5229b-bac7-4328-b6fe-320d691c40be"
+    },
+    {
+      "title": "Test",
+      "author": "e065c374-25e2-4c25-bb32-009428b44de4",
+      "category": "8dd2afca-2d87-4bfd-b884-f2b64c2aff37",
+      "id": "913c3561-0565-4d5c-8650-e6e46446fd1e"
+    },
+    {
+      "title": "Test",
+      "author": "e065c374-25e2-4c25-bb32-009428b44de4",
+      "category": "8dd2afca-2d87-4bfd-b884-f2b64c2aff37",
+      "id": "19a1fb52-e194-407d-838c-af0508b6f469"
     }
   ],
   "authors": [
@@ -12,6 +42,11 @@
       "name": "John Doe",
       "birthdate": "1.1.2000",
       "id": "e065c374-25e2-4c25-bb32-009428b44de4"
+    },
+    {
+      "name": "Date Test",
+      "birthdate": "2000-01-01",
+      "id": "0c297206-4102-4515-ac9a-6bacec10c227"
     }
   ],
   "categories": [
