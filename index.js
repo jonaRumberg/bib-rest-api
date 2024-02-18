@@ -95,6 +95,31 @@ app.get('/books/:id', async (req, res) => {
 
 app.post('/books/:id', async (req, res) => {
 	console.log("POST Book " + req.params.id)
+
+	//find book
+	const i = db.data.books.findIndex(b => b.id == req.params.id)
+	if(i != -1) {
+
+		//validate data
+		if(validate(req.body, model.books)) {
+			
+			//update entry
+			const book = db.data.books[i];
+			req.body.id = book.id;
+
+			db.data.books[i] = req.body;
+			db.write();
+			res.sendStatus(200)
+
+		} else {
+			console.log("Bad request")
+			res.sendStatus(400);
+		}
+
+	} else {
+		console.log("Not found");
+		res.sendStatus(404);
+	}
 })
 
 
@@ -156,6 +181,32 @@ app.get('/authors/:id', async (req, res) => {
 
 app.post('/authors/:id', async (req, res) => {
 	console.log("POST Author " + req.params.id)
+
+	//find author
+	const i = db.data.authors.findIndex(b => b.id == req.params.id)
+	if(i != -1) {
+
+		//validate data
+		if(validate(req.body, model.authors)) {
+			
+			//update entry
+			const author = db.data.authors[i];
+			req.body.id = author.id;
+			req.body.birthdate = moment(req.body.birthdate).format("YYYY-MM-DD")
+
+			db.data.authors[i] = req.body;
+			db.write();
+			res.sendStatus(200)
+
+		} else {
+			console.log("Bad request")
+			res.sendStatus(400);
+		}
+
+	} else {
+		console.log("Not found");
+		res.sendStatus(404);
+	}
 })
 
 
@@ -216,6 +267,31 @@ app.get('/categories/:id', async (req, res) => {
 
 app.post('/categories/:id', async (req, res) => {
 	console.log("POST Category " + req.params.id)
+
+	//find author
+	const i = db.data.categories.findIndex(b => b.id == req.params.id)
+	if(i != -1) {
+
+		//validate data
+		if(validate(req.body, model.categories)) {
+			
+			//update entry
+			const category = db.data.categories[i];
+			req.body.id = category.id;
+
+			db.data.categories[i] = req.body;
+			db.write();
+			res.sendStatus(200)
+
+		} else {
+			console.log("Bad request")
+			res.sendStatus(400);
+		}
+
+	} else {
+		console.log("Not found");
+		res.sendStatus(404);
+	}
 })
 
 
