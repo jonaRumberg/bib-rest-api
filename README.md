@@ -7,7 +7,7 @@
         id,
         title,
         author,
-        category,
+        category
     }
 * Author
     {
@@ -18,11 +18,7 @@
 * Category
     {
         id,
-        name
-    }
-    {
-        id,
-        title,
+        name,
         description
     }
 
