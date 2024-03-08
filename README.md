@@ -2,45 +2,47 @@
 
 **Entitäten:**
 
-* Bücher 
+* Book 
     {
         id,
         title,
         author,
         category,
     }
-* Verfasser
+* Author
     {
         id,
         name,
         birthdate
     }
-* Kategorien
+* Category
     {
         id,
-        title
+        name
+    }
+    {
+        id,
+        title,
+        description
     }
 
-## Bücher
+**Endpoints:**
 
-* GET /bücher: Gibt eine Liste aller Bücher zurück.
-* POST /bücher: Fügt ein neues Buch hinzu.
-* GET /bücher/{buch_id}: Gibt Details zu einem bestimmten Buch zurück.
-* PUT /bücher/{buch_id}: Aktualisiert ein bestimmtes Buch.
-* DELETE /bücher/{buch_id}: Löscht ein spezifisches Buch.
+* GET /api/v1/books
+* GET /api/v1/books/{id}
+* POST /api/v1/books
+* POST /api/v1/books/{id}
+* DELETE /api/v1/books/{id}
 
-## Verfasser
+* GET /api/v1/authors
+* GET /api/v1/authors/{id}
+* POST /api/v1/authors
+* POST /api/v1/authors/{id}
+* DELETE /api/v1/authors/{id}
 
-* GET /verfasser: Gibt eine Liste aller Verfasser zurück.
-* POST /verfasser: Fügt einen neuen Verfasser hinzu.
-* GET /verfasser/{verfasser_id}: Gibt Details zu einem bestimmten Verfasser zurück.
-* PUT /verfasser/{verfasser_id}: Aktualisiert einen bestimmten Verfasser.
-* DELETE /verfasser/{verfasser_id}: Löscht einen spezifischen Verfasser.
+* GET /api/v1/categories
+* GET /api/v1/categories/{id}
+* POST /api/v1/categories
+* POST /api/v1/categories/{id}
+* DELETE /api/v1/categories/{id}
 
-## Kategorien
-
-* GET /kategorien: Gibt eine Liste aller Kategorien zurück.
-* POST /kategorien: Fügt eine neue Kategorie hinzu.
-* GET /kategorien/{kategorie_id}: Gibt Details zu einer bestimmten Kategorie zurück.
-* PUT /kategorien/{kategorie_id}: Aktualisiert eine spezifische Kategorie.
-* DELETE /kategorien/{kategorie_id}: Löscht eine spezifische Kategorie.

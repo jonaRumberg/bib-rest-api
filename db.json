@@ -29,24 +29,45 @@
       "author": "e065c374-25e2-4c25-bb32-009428b44de4",
       "category": "8dd2afca-2d87-4bfd-b884-f2b64c2aff37",
       "id": "19a1fb52-e194-407d-838c-af0508b6f469"
+    },
+    {
+      "title": "Test2",
+      "author": "0c297206-4102-4515-ac9a-6bacec10c227",
+      "category": "8dd2afca-2d87-4bfd-b884-f2b64c2aff37",
+      "id": "1fd4b277-0e2c-4500-bd89-a6cec106404d"
     }
   ],
   "authors": [
     {
-      "name": "John Doe",
-      "birthdate": "1.1.2000",
-      "id": "e065c374-25e2-4c25-bb32-009428b44de4"
+      "name": "Date Test",
+      "birthdate": "2000-01-01",
+      "id": "0c297206-4102-4515-ac9a-6bacec10c227"
     },
     {
       "name": "Date Test",
       "birthdate": "2000-01-01",
-      "id": "0c297206-4102-4515-ac9a-6bacec10c227"
+      "id": "f4c53dec-7c38-4d0a-9fe4-51fc7369af41"
+    },
+    {
+      "name": "Date Test",
+      "birthdate": "2000-01-01",
+      "id": "57ac82c4-da30-42cb-8b29-1610ecf8b892"
+    },
+    {
+      "name": "Date Test",
+      "birthdate": "2000-01-04",
+      "id": "1622f471-7f5a-4692-961d-f7b398b80a50"
     }
   ],
   "categories": [
     {
       "title": "Fantasy",
       "id": "8dd2afca-2d87-4bfd-b884-f2b64c2aff37"
+    },
+    {
+      "title": "Scifi",
+      "description": "Ipsum lorem",
+      "id": "a59456ea-2b5f-4a6f-aa5c-8501c6710da9"
     }
   ]
 }

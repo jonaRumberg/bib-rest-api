@@ -53,13 +53,21 @@ const model = {
 const db = await JSONFilePreset('db.json', defaultData)
 
 //Books endpoints
-app.get('/books', async (_req, res) => {
+app.get('/api/v1/books', async (req, res) => {
 	console.log("GET Books");
 
-	res.status(200).send(db.data.books);
+	if(req.query.q != undefined) {
+		const q = req.query.q.toLowerCase();
+		const books = db.data.books.filter(b => b.title.toLowerCase().includes(q));
+		res.status(200).json({success: true, data: books});
+	}
+	else {
+		res.status(200).json({success: true, data: db.data.books});
+	}
+
 })
 
-app.post('/books', (req, res) => {
+app.post('/api/v1/books', (req, res) => {
 	console.log("POST Books");
 
 	if(validate(req.body, model.books)){
@@ -71,29 +79,29 @@ app.post('/books', (req, res) => {
 
 		db.data.books.push(req.body);
 		db.write()
-		res.sendStatus(201);
+		res.status(201).json({success: true, id: req.body.id});
 	} else {
 		console.log("Bad request")
 
-		res.sendStatus(400);
+		res.status(400).json({success: false});
 	}
 });
 
-app.get('/books/:id', async (req, res) => {
+app.get('/api/v1/books/:id', async (req, res) => {
 	console.log("GET Book " + req.params.id)
 	
 	const book = db.data.books.find(b => b.id == req.params.id)
 
 	if(book != undefined) {
 		console.log(book);
-		res.status(200).send(book)
+		res.status(200).json({success: true, data: book});
 	} else {
 		console.log("Not found");
-		res.sendStatus(404);
+		res.status(404).json({success: false});
 	}
 })
 
-app.post('/books/:id', async (req, res) => {
+app.post('/api/v1/books/:id', async (req, res) => {
 	console.log("POST Book " + req.params.id)
 
 	//find book
@@ -109,21 +117,21 @@ app.post('/books/:id', async (req, res) => {
 
 			db.data.books[i] = req.body;
 			db.write();
-			res.sendStatus(200)
+			res.status(200).json({success: true, data: req.body});
 
 		} else {
 			console.log("Bad request")
-			res.sendStatus(400);
+			res.status(400).json({success: false});
 		}
 
 	} else {
 		console.log("Not found");
-		res.sendStatus(404);
+		res.status(404).json({success: false});
 	}
 })
 
 
-app.delete('/books/:id', async (req, res) => {
+app.delete('/api/v1/books/:id', async (req, res) => {
 	console.log("DELETE Book " + req.params.id)
 
 	const i = db.data.books.findIndex(b => b.id == req.params.id)
@@ -131,20 +139,27 @@ app.delete('/books/:id', async (req, res) => {
 	if(i != -1){
 		db.data.books.splice(i, 1)
 		db.write()
-		res.sendStatus(200)
+		res.status(200).json({success: true});
 	} else {
-		res.sendStatus(404)
+		res.status(404).json({success: false});
 	}
 })
 
 //Autors endpoints
-app.get('/authors', async (_req, res) => {
+app.get('/api/v1/authors', async (_req, res) => {
 	console.log("GET Authors");
 
-	res.status(200).send(db.data.authors);
+	if(_req.query.q != undefined) {
+		const q = _req.query.q.toLowerCase();
+		const authors = db.data.authors.filter(b => b.name.toLowerCase().includes(q));
+		res.status(200).json({success: true, data: authors});
+	}
+	else {
+		res.status(200).json({success: true, data: db.data.authors});
+	}
 })
 
-app.post('/authors', (req, res) => {
+app.post('/api/v1/authors', (req, res) => {
 	console.log("POST Authors");
 
 	if(validate(req.body, model.authors)){
@@ -157,29 +172,29 @@ app.post('/authors', (req, res) => {
 
 		db.data.authors.push(req.body);
 		db.write()
-		res.sendStatus(201);
+		res.status(201).json({success: true, id: req.body.id});
 	} else {
 		console.log("Bad request")
 
-		res.sendStatus(400);
+		res.status(400).json({success: false});
 	}
 });
 
-app.get('/authors/:id', async (req, res) => {
+app.get('/api/v1/authors/:id', async (req, res) => {
 	console.log("GET Author " + req.params.id)
 	
 	const author = db.data.authors.find(b => b.id == req.params.id)
 
 	if(author != undefined) {
 		console.log(author);
-		res.status(200).send(author)
+		res.status(200).json({success: true, data: author});
 	} else {
 		console.log("Not found");
-		res.sendStatus(404);
+		res.status(404).json({success: false});
 	}
 })
 
-app.post('/authors/:id', async (req, res) => {
+app.post('/api/v1/authors/:id', async (req, res) => {
 	console.log("POST Author " + req.params.id)
 
 	//find author
@@ -196,21 +211,21 @@ app.post('/authors/:id', async (req, res) => {
 
 			db.data.authors[i] = req.body;
 			db.write();
-			res.sendStatus(200)
+			res.status(200).json({success: true, data: req.body});
 
 		} else {
 			console.log("Bad request")
-			res.sendStatus(400);
+			res.status(400).json({success: false});
 		}
 
 	} else {
 		console.log("Not found");
-		res.sendStatus(404);
+		res.status(404).json({success: false});
 	}
 })
 
 
-app.delete('/authors/:id', async (req, res) => {
+app.delete('/api/v1/authors/:id', async (req, res) => {
 	console.log("DELETE Author " + req.params.id)
 
 	const i = db.data.authors.findIndex(b => b.id == req.params.id)
@@ -218,20 +233,27 @@ app.delete('/authors/:id', async (req, res) => {
 	if(i != -1){
 		db.data.authors.splice(i, 1)
 		db.write()
-		res.sendStatus(200)
+		res.status(200).json({success: true});
 	} else {
-		res.sendStatus(404)
+		res.status(404).json({success: false});
 	}
 })
 
 //Categories endpoints
-app.get('/categories', async (_req, res) => {
+app.get('/api/v1/categories', async (_req, res) => {
 	console.log("GET Categories");
 
-	res.status(200).send(db.data.categories);
+	if(_req.query.q != undefined) {
+		const q = _req.query.q.toLowerCase();
+		const categories = db.data.categories.filter(b => b.title.toLowerCase().includes(q));
+		res.status(200).json({success: true, data: categories});
+	}
+	else {
+		res.status(200).json({success: true, data: db.data.categories});
+	}
 })
 
-app.post('/categories', (req, res) => {
+app.post('/api/v1/categories', (req, res) => {
 	console.log("POST Categories");
 
 	if(validate(req.body, model.categories)){
@@ -243,29 +265,29 @@ app.post('/categories', (req, res) => {
 
 		db.data.categories.push(req.body);
 		db.write()
-		res.sendStatus(201);
+		res.status(201).json({success: true, id: req.body.id});
 	} else {
 		console.log("Bad request")
 
-		res.sendStatus(400);
+		res.status(400).json({success: false});
 	}
 });
 
-app.get('/categories/:id', async (req, res) => {
+app.get('/api/v1/categories/:id', async (req, res) => {
 	console.log("GET Category " + req.params.id)
 	
 	const category = db.data.categories.find(b => b.id == req.params.id)
 
 	if(category != undefined) {
 		console.log(category);
-		res.status(200).send(category)
+		res.status(200).json({success: true, data: category});
 	} else {
 		console.log("Not found");
-		res.sendStatus(404);
+		res.status(404).json({success: false});
 	}
 })
 
-app.post('/categories/:id', async (req, res) => {
+app.post('/api/v1/categories/:id', async (req, res) => {
 	console.log("POST Category " + req.params.id)
 
 	//find author
@@ -281,31 +303,31 @@ app.post('/categories/:id', async (req, res) => {
 
 			db.data.categories[i] = req.body;
 			db.write();
-			res.sendStatus(200)
+			res.status(200).json({success: true, data: req.body});
 
 		} else {
 			console.log("Bad request")
-			res.sendStatus(400);
+			res.status(400).json({success: false});
 		}
 
 	} else {
 		console.log("Not found");
-		res.sendStatus(404);
+		res.status(404).json({success: false});
 	}
 })
 
 
-app.delete('/categories/:id', async (req, res) => {
+app.delete('/api/v1/categories/:id', async (req, res) => {
 	console.log("DELETE Category " + req.params.id)
 
-	const i = db.data.authors.findIndex(b => b.id == req.params.id)
+	const i = db.data.categories.findIndex(b => b.id == req.params.id)
 
 	if(i != -1){
-		db.data.authors.splice(i, 1)
+		db.data.categories.splice(i, 1)
 		db.write()
-		res.sendStatus(200)
+		res.status(200).json({success: true});
 	} else {
-		res.sendStatus(404)
+		res.status(404).json({success: false});
 	}
 })
 
